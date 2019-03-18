@@ -7,6 +7,7 @@ spring:
   cloud:
     config:
       enabled: true
+      uri: http://192.168.1.47:8888
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,6 +16,19 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+
+server:
+  port: 8901
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://192.168.1.47:8761/eureka,http://192.168.1.47:8762/eureka
 
 
 
